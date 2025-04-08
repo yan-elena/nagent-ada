@@ -1,0 +1,6 @@
+mas example1 {
+
+    agent alice {
+        ag-class: adaptation.agent.ANormativeAg("src/reg/alice_norms.npl")
+    }
+}

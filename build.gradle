@@ -52,14 +52,14 @@ task run (type: JavaExec, dependsOn: 'classes') {
         mkdir 'log'
     }
     mainClass = 'jacamo.infra.JaCaMoLauncher'
-    args 'adaptation.jcm'
+    args 'example1.jcm'
     // jvmArgs '-Xss15m'
     classpath sourceSets.main.runtimeClasspath
 }
 
 task buildJCMDeps (type: JavaExec, dependsOn: 'classes') {
     mainClass = 'jacamo.infra.RunJaCaMoProject'
-    args = ['adaptation.jcm', '--deps']
+    args = ['example1.jcm', '--deps']
     classpath sourceSets.main.runtimeClasspath
 }
 
@@ -115,8 +115,8 @@ task uberJar(type: Jar, dependsOn: 'classes') {
 
     doFirst {
         copy {
-            from 'adaptation.jcm'
-            rename 'adaptation.jcm','default.jcm'
+            from 'example1.jcm'
+            rename 'example1.jcm','default.jcm'
             into project.buildDir.absolutePath + '/jcm'
         }
     }
