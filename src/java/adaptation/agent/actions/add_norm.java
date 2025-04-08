@@ -1,6 +1,7 @@
 package adaptation.agent.actions;
 
-import adaptation.agent.ANormativeAg;
+import adaptation.agent.ANormativeAgent;
+import adaptation.agent.ANormativeAgentNPL;
 import jason.asSemantics.DefaultInternalAction;
 import jason.asSemantics.TransitionSystem;
 import jason.asSemantics.Unifier;
@@ -15,7 +16,7 @@ import jason.asSyntax.Term;
 public class add_norm extends DefaultInternalAction {
     @Override
     public Object execute(TransitionSystem ts, Unifier un, Term[] args) throws Exception {
-        var ag = (ANormativeAg) ts.getAg();
+        ANormativeAgent ag = (ANormativeAgent) ts.getAg();
         StringTerm id = (StringTerm) args[0];
         Literal consequence = (Literal) args[1];
         LogicalFormula activation = (LogicalFormula) args[2];

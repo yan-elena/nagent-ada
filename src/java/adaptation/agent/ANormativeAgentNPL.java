@@ -5,13 +5,9 @@ import npl.NormativeAg;
 import util.NPLMonitor;
 
 /**
- * An extended normative agent with the capability to adapt regulations.
+ * An extended normative agent with the capability to adapt regulations in NPL.
  */
-public class ANormativeAg extends NormativeAg {
-
-    public ANormativeAg() {
-        this.interpreter = new NPLAInterpreter();
-    }
+public class ANormativeAgentNPL extends NormativeAg implements ANormativeAgent {
 
     @Override
     public void initAg() {
@@ -25,6 +21,7 @@ public class ANormativeAg extends NormativeAg {
         }
     }
 
+    @Override
     public NPLAInterpreter getNPLAInterpreter() {
         return (NPLAInterpreter) this.interpreter;
     }
