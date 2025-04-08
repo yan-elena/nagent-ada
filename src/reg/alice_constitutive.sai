@@ -1,0 +1,7 @@
+institution_id : alice_inst .
+
+status_functions:
+states: vl(X).
+
+constitutive_rules:
+1: count-as vl(20) .

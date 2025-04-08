@@ -1,0 +1,156 @@
+/*
+   Project sanction
+
+   Gradle build file for JaCaMo Applications
+   November 24, 2023 - 12:30:45
+*/
+
+defaultTasks 'run'
+
+apply plugin: 'java'
+apply plugin: 'maven-publish'
+apply from: '.jcm-deps.gradle' // this file contains dependencies declared in the .jcm files
+
+version '1.0'
+group   'org.jacamo'
+
+
+repositories {
+    maven { url "https://raw.githubusercontent.com/jacamo-lang/mvn-repo/master" }
+    maven { url "https://raw.githubusercontent.com/yan-elena/mvn-repo/main" } // experiment with npl(a)
+    maven { url "https://repo.gradle.org/gradle/libs-releases" }
+    flatDir { dirs 'lib' }
+
+    mavenCentral()
+    maven { url "https://jitpack.io" }
+
+}
+
+dependencies {
+    implementation('org.jacamo:jacamo:1.3.0')
+    implementation('org.regjacamo:npl:0.8.1')
+    implementation('org.regjacamo:sai:0.5.6')
+}
+
+sourceSets {
+    main {
+        java {
+            srcDir 'src/env'
+            srcDir 'src/agt'
+            srcDir 'src/org'
+            srcDir 'src/reg'
+            srcDir 'src/int'
+            srcDir 'src/java'
+        }
+        resources {
+            srcDir 'src/resources'
+        }
+    }
+}
+
+task run (type: JavaExec, dependsOn: 'classes') {
+    group       ' JaCaMo'
+    description 'runs the JaCaMo application'
+    doFirst {
+        mkdir 'log'
+    }
+    mainClass = 'jacamo.infra.JaCaMoLauncher'
+    args 'example1.jcm'
+    // jvmArgs '-Xss15m'
+    classpath sourceSets.main.runtimeClasspath
+}
+
+task example1 (type: JavaExec, dependsOn: 'classes') {
+    group       ' JaCaMo'
+    description 'runs the JaCaMo application'
+    doFirst {
+        mkdir 'log'
+    }
+    mainClass = 'jacamo.infra.JaCaMoLauncher'
+    args 'example1.jcm'
+    // jvmArgs '-Xss15m'
+    classpath sourceSets.main.runtimeClasspath
+}
+
+task example2 (type: JavaExec, dependsOn: 'classes') {
+    group       ' JaCaMo'
+    description 'runs the JaCaMo application'
+    doFirst {
+        mkdir 'log'
+    }
+    mainClass = 'jacamo.infra.JaCaMoLauncher'
+    args 'example2.jcm'
+    // jvmArgs '-Xss15m'
+    classpath sourceSets.main.runtimeClasspath
+}
+
+task buildJCMDeps (type: JavaExec, dependsOn: 'classes') {
+    mainClass = 'jacamo.infra.RunJaCaMoProject'
+    args = ['example1.jcm', '--deps']
+    classpath sourceSets.main.runtimeClasspath
+}
+
+jar {
+    duplicatesStrategy 'exclude'
+
+    archiveBaseName = project.name
+
+    from (project.projectDir.absolutePath + '/src') {
+        include '**/*.asl'
+        include '**/*.xml'
+        include '**/*.sai'
+        include '**/*.ptl'
+        include '**/*.jcm'
+        exclude 'test'
+    }
+    from (project.buildDir.absolutePath + '/classes') {
+        include '**/*'
+    }
+}
+
+publishing {
+    publications {
+        maven(MavenPublication) {
+            from components.java
+        }
+    }
+}
+
+
+task uberJar(type: Jar, dependsOn: 'classes') {
+    group      ' JaCaMo'
+    description 'creates a single runnable jar file with all dependencies'
+    duplicatesStrategy 'exclude'
+
+    manifest {
+        attributes 'Main-Class': 'jacamo.infra.JaCaMoLauncher'
+    }
+    archiveBaseName = 'jacamo-sanction' // the name must start with jacamo so that jacamo...jar is found in the classpath
+    from { configurations.runtimeClasspath.collect { it.isDirectory() ? it : zipTree(it) } }
+    from (project.projectDir.absolutePath) {
+        include '**/*.asl'
+        include '**/*.xml'
+        include '**/*.sai'
+        include '**/*.ptl'
+        include '**/*.jcm'
+        include '*.properties'
+    }
+    from (project.buildDir.absolutePath + '/jcm') {
+        include '**/*'
+    }
+    with jar
+
+    doFirst {
+        copy {
+            from 'example1.jcm'
+            rename 'example1.jcm','default.jcm'
+            into project.buildDir.absolutePath + '/jcm'
+        }
+    }
+}
+
+clean {
+    delete 'bin'
+    delete 'build'
+    delete 'log'
+}

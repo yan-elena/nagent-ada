@@ -1,0 +1,10 @@
+mas ex2 {
+
+    agent alice {
+        ag-class: sai.bridges.jacamo.ANormativeAgentSAI("src/reg/alice_norms.npl")
+    }
+
+    institution inst : src/reg/alice_constitutive.sai {
+
+    }
+}
