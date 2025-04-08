@@ -1,0 +1,10 @@
+mas example2 {
+
+    agent alice {
+        ag-class: adaptation.agent.ANormativeAgentNPL("src/reg/alice_norms.npl")
+    }
+
+    institution inst : src/reg/alice_constitutive.sai {
+
+    }
+}
