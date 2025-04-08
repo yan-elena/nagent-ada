@@ -14,12 +14,11 @@ import jason.asSyntax.Term;
  * An internal action for remove an existing norm in the normative engine of the agent.
  */
 public class remove_norm extends DefaultInternalAction {
+
     @Override
     public Object execute(TransitionSystem ts, Unifier un, Term[] args) throws Exception {
         ANormativeAgent ag = (ANormativeAgent) ts.getAg();
         StringTerm id = (StringTerm) args[0];
-        Literal consequence = (Literal) args[1];
-        LogicalFormula activation = (LogicalFormula) args[2];
         ag.getLogger().info("[Action] Remove norm - id: " + id);
         ag.getNPLAInterpreter().removeNorm(id.getString());
         return true;

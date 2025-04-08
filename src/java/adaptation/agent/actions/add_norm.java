@@ -14,6 +14,7 @@ import jason.asSyntax.Term;
  * An internal action for add a new norm in the normative engine of the agent.
  */
 public class add_norm extends DefaultInternalAction {
+
     @Override
     public Object execute(TransitionSystem ts, Unifier un, Term[] args) throws Exception {
         ANormativeAgent ag = (ANormativeAgent) ts.getAg();
