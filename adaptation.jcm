@@ -1,0 +1,8 @@
+mas ex2 {
+
+    agent alice
+
+    institution inst : src/reg/alice_constitutive.sai {
+
+    }
+}

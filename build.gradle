@@ -17,7 +17,6 @@ group   'org.jacamo'
 
 repositories {
     maven { url "https://raw.githubusercontent.com/jacamo-lang/mvn-repo/master" }
-    maven { url "https://raw.githubusercontent.com/yan-elena/mvn-repo/main" } // experiment with npl(a)
     maven { url "https://repo.gradle.org/gradle/libs-releases" }
     flatDir { dirs 'lib' }
 
@@ -28,8 +27,6 @@ repositories {
 
 dependencies {
     implementation('org.jacamo:jacamo:1.3.0')
-    implementation('org.regjacamo:npl:0.8.1')
-    implementation('org.regjacamo:sai:0.5.6')
 }
 
 sourceSets {
@@ -55,38 +52,14 @@ task run (type: JavaExec, dependsOn: 'classes') {
         mkdir 'log'
     }
     mainClass = 'jacamo.infra.JaCaMoLauncher'
-    args 'example1.jcm'
-    // jvmArgs '-Xss15m'
-    classpath sourceSets.main.runtimeClasspath
-}
-
-task example1 (type: JavaExec, dependsOn: 'classes') {
-    group       ' JaCaMo'
-    description 'runs the JaCaMo application'
-    doFirst {
-        mkdir 'log'
-    }
-    mainClass = 'jacamo.infra.JaCaMoLauncher'
-    args 'example1.jcm'
-    // jvmArgs '-Xss15m'
-    classpath sourceSets.main.runtimeClasspath
-}
-
-task example2 (type: JavaExec, dependsOn: 'classes') {
-    group       ' JaCaMo'
-    description 'runs the JaCaMo application'
-    doFirst {
-        mkdir 'log'
-    }
-    mainClass = 'jacamo.infra.JaCaMoLauncher'
-    args 'example2.jcm'
+    args 'adaptation.jcm'
     // jvmArgs '-Xss15m'
     classpath sourceSets.main.runtimeClasspath
 }
 
 task buildJCMDeps (type: JavaExec, dependsOn: 'classes') {
     mainClass = 'jacamo.infra.RunJaCaMoProject'
-    args = ['example1.jcm', '--deps']
+    args = ['adaptation.jcm', '--deps']
     classpath sourceSets.main.runtimeClasspath
 }
 
@@ -142,8 +115,8 @@ task uberJar(type: Jar, dependsOn: 'classes') {
 
     doFirst {
         copy {
-            from 'example1.jcm'
-            rename 'example1.jcm','default.jcm'
+            from 'adaptation.jcm'
+            rename 'adaptation.jcm','default.jcm'
             into project.buildDir.absolutePath + '/jcm'
         }
     }
