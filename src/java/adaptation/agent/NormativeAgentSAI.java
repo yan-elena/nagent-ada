@@ -24,7 +24,7 @@ import java.util.List;
 /**
  * A normative agent that has a NPL normative and SAI constitutive reasoning module integrated in its mind.
  */
-public class NormativeAgentSai extends NormativeAg {
+public class NormativeAgentSAI extends NormativeAg {
 
     private Npl2Sai npl2sai;
     private SaiEngine institution;

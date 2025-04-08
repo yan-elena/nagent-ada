@@ -5,7 +5,7 @@ import adaptation.NPLAInterpreter;
 /**
  * An extended normative agent with the capability to adapt regulations.
  */
-public class ANormativeAgentSAI extends NormativeAgentSai implements ANormativeAgent {
+public class ANormativeAgentSAI extends NormativeAgentSAI implements ANormativeAgent {
 
     public ANormativeAgentSAI() {
         this.interpreter = new NPLAInterpreter();
