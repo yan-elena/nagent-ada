@@ -1,0 +1,14 @@
+mas example2 {
+
+    agent carlos {
+        ag-class: adaptation.agent.ANormativeAgentSAI("src/reg/carlos_norms.npl", "src/reg/carlos_constitutive.sai")
+        ag-arch: adaptation.agent.NormativeAgentSAIArch()
+        focus: wsp.clock
+    }
+
+    agent dan
+
+    workspace wsp {
+        artifact clock : cartago.tools.Clock()
+    }
+}
