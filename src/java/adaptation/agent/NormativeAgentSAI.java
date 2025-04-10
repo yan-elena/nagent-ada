@@ -33,18 +33,25 @@ public class NormativeAgentSAI extends NormativeAg {
     public void initAg() {
         super.initAg();
         this.npl2sai = new Npl2Sai(interpreter);
+
+        NPLMonitor gui = new NPLMonitor();
+        try {
+            gui.add("demo", interpreter);
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
     }
 
     @Override
     public void load(String nplProgram) throws Exception {
-        NormativeProgram p = new NormativeProgram();
+        NormativeProgram normativeProgram = new NormativeProgram();
 
         File f = new File(nplProgram);
         try {
             if (f.exists()) {
-                new nplp(new FileReader(nplProgram)).program(p, null);
+                new nplp(new FileReader(nplProgram)).program(normativeProgram, null);
             } else {
-                new nplp(new StringReader(nplProgram)).program(p, null);
+                new nplp(new StringReader(nplProgram)).program(normativeProgram, null);
             }
         } catch (FileNotFoundException e) {
         } catch (ParseException e) {
@@ -52,16 +59,17 @@ public class NormativeAgentSAI extends NormativeAg {
             e.printStackTrace();
             throw e;
         } catch (Exception e) {
-            // TODO Auto-generated catch block
             e.printStackTrace();
         }
 
 
+        // Converts NPL norms to SAI norms
         /* The following piece of code is introduced in this artifact to convert Npl norms in SAI compliant NPL Nomrs */
-        Iterator<INorm> it = p.getRoot().getNorms().iterator(); //get the norms to be loaded in the NPL Interpreter
+        Iterator<INorm> it = normativeProgram.getRoot().getNorms().iterator(); //get the norms to be loaded in the NPL Interpreter
         List<String> toRemove = new ArrayList<String>();
         List<INorm> toAdd = new ArrayList<INorm>();
         int i=0;
+
         while(it.hasNext()) { // for each norm...
             INorm n = it.next();
             try {
@@ -75,44 +83,34 @@ public class NormativeAgentSAI extends NormativeAg {
                 //replace the original norm by a SAI compliant one
                 toAdd.add(nSai);
             } catch (jason.asSyntax.parser.ParseException e) {
-                // TODO Auto-generated catch block
                 e.printStackTrace();
             }
         }
 
 
         for(String r:toRemove) {
-            p.getRoot().removeNorm(r);
+            normativeProgram.getRoot().removeNorm(r);
         }
 
         for(INorm a:toAdd) {
             try {
-                p.getRoot().addNorm(a);
+                normativeProgram.getRoot().addNorm(a);
             } catch (Exception e) {
-                // TODO Auto-generated catch block
                 e.printStackTrace();
             }
         }
 
 
-        interpreter.loadNP(p.getRoot());
+        interpreter.loadNP(normativeProgram.getRoot());
 
         getNormEngine().updateState();
-
-
-        NPLMonitor gui = new NPLMonitor();
-        try {
-            gui.add("demo", interpreter);
-        } catch (Exception e) {
-            throw new RuntimeException(e);
-        }
     }
 
     public INormativeEngine getNormEngine() {
         return this.npl2sai;
     }
 
-    @LINK
+    // Link from SAI to NPL????
     public void setInstitution(SaiEngine institution){
         this.institution = institution;
         institution.addNormativeEngine(this.npl2sai);
