@@ -1,0 +1,15 @@
+institution_id : karlos_inst .
+
+status_functions:
+states: vl(X).
+
+
+constitutive_rules:
+1: count-as vl(true) .
+2: nticks(X) count-as vl(9000) while X>9000 .
+3: nticks(X) count-as vl(8000) while X>8000 .
+4: nticks(X) count-as vl(7000) while X>7000 .
+5: nticks(X) count-as vl(5000) while X>5000 .
+
+
+//2: unfulfilled_count(4) count-as deliberate(n2) .
