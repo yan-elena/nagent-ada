@@ -1,10 +1,15 @@
 mas example2 {
 
-    agent alice {
-        ag-class: adaptation.agent.ANormativeAgentNPL("src/reg/alice_norms.npl")
+    agent bob {
+        ag-class: adaptation.agent.ANormativeAgentSAI("src/reg/bob_norms.npl")
+        focus: wsp.clock, inst_test.inst_test_art
     }
 
-    institution inst : src/reg/alice_constitutive.sai {
+    workspace wsp {
+        artifact clock : cartago.tools.Clock()
+    }
 
+    institution inst_test : src/reg/bob_constitutive.sai {
+        workspaces: wsp
     }
 }
