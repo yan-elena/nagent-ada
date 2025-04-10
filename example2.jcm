@@ -1,7 +1,7 @@
 mas example2 {
 
     agent bob {
-        ag-class: adaptation.agent.ANormativeAgentSAI("src/reg/bob_norms.npl")
+        ag-class: adaptation.agent.ANormativeAgentNPL("src/reg/bob_norms.npl")
         focus: wsp.clock, inst_test.inst_test_art
     }
 

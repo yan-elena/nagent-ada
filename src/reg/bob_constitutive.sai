@@ -2,7 +2,7 @@ institution_id : bob_inst .
 
 status_functions:
 events: vl(X).
-states: detect(What), deliberate(What).
+states: detect(What), deliberate(What), tick(X).
 
 
 constitutive_rules:
@@ -10,5 +10,5 @@ constitutive_rules:
 2: unfulfilled_count(4) count-as deliberate(n2) .
 
 
-//2: nticks(V) count-as stopped while V>=5000 . // after 5000, stops the
+3: nticks(V) count-as tick(5000) while V>=5000 . // after 5000, stops the
 //2: count-as deliberate(N) while unfulfilled_count(2).
