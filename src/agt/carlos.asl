@@ -3,6 +3,7 @@
 +!start : true
     <-  .print("started");
         !manage_clock;
+        +b;
         .
 
 /*

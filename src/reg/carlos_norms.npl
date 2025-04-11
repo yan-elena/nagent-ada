@@ -1,7 +1,7 @@
 scope main {
 
     // bob has 3 seconds to achieve b(X), or else, sanction rule s1 will be triggered -- vl(X) & X > 5
-    norm n1: nticks(V) & V < 5000
+    norm n1: vl(X)
        -> obligation(bob, true, b(X), `10 seconds`).
 
 }
