@@ -18,6 +18,7 @@ import sai.main.institution.SaiEngine;
 import sai.main.lang.parser.sai_constitutiveLexer;
 import sai.main.lang.parser.sai_constitutiveListenerImpl;
 import sai.main.lang.parser.sai_constitutiveParser;
+import sai.norms.npl.npl2sai.Npl2Sai;
 import util.NPLMonitor;
 
 import java.io.IOException;
@@ -30,7 +31,7 @@ import java.util.Iterator;
  */
 public class NormativeAgentSAI extends NormativeAg implements CircumstanceListener {
 
-    private AgentNpl2Sai npl2Sai;
+    private Npl2Sai npl2Sai;
     private RuleEngine saiRuleEngine;
     private SaiEngine saiEngine;
 
@@ -40,7 +41,7 @@ public class NormativeAgentSAI extends NormativeAg implements CircumstanceListen
 
         this.saiRuleEngine = new RuleEngine();
         this.interpreter.setProduceAddBelEvents(true);
-        this.npl2Sai = new AgentNpl2Sai(interpreter, this);
+        this.npl2Sai = new Npl2Sai(interpreter);
         this.saiEngine = new SaiEngine();
         this.saiRuleEngine.addInstitution(this.saiEngine);
 

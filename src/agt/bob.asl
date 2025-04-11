@@ -3,9 +3,7 @@ unfulfilled_count(0).
 !start.
 
 +!start
-    <-  //.print("setup sai");
-        //!setup_sai; //todo: check connection
-        !manage_clock;
+    <-  !manage_clock;
         .print("started").
 
 
@@ -38,20 +36,6 @@ unfulfilled_count(0).
 +state_sf(SF)
     <-  .print("status function: ", SF).
 
-
-
-//todo: connect norms to institution
-+!setup_sai: focusing(ArtSai,inst_test_art,_,_,inst_test,_)
-    <-  getSaiEngine(SE)[artifact_id(ArtSai)];
-        .print("SAI Engine: ", SE);
-        adaptation.agent.actions.set_institution(SE);
-        .print("connected: ", ArtSai);
-        .
-
-+!setup_sai
-    <-  .print("waiting for sai");
-        .wait(focusing(ArtSai,inst_test_art,_,_,inst_test,_) & focusing(NplArt,nb1,_,_,_,_));
-        !setup_sai.
 
 +!manage_clock : focusing(Clock,clock,_,_,_,_)
     <-  setFrequency(1);
