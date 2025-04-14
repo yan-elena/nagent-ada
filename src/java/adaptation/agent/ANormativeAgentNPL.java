@@ -9,6 +9,10 @@ import util.NPLMonitor;
  */
 public class ANormativeAgentNPL extends NormativeAg implements ANormativeAgent {
 
+    public ANormativeAgentNPL() {
+        this.interpreter = new NPLAInterpreter();
+    }
+
     @Override
     public void initAg() {
         super.initAg();
