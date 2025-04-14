@@ -2,7 +2,6 @@ package adaptation.agent;
 
 import jason.asSemantics.CircumstanceListener;
 import jason.asSemantics.Event;
-import jason.asSyntax.Atom;
 import jason.asSyntax.Literal;
 import jason.asSyntax.Trigger;
 import jason.mas2j.AgentParameters;
@@ -21,7 +20,6 @@ import sai.norms.npl.npl2sai.Npl2Sai;
 import util.NPLMonitor;
 
 import java.io.IOException;
-import java.time.LocalDateTime;
 import java.util.Collection;
 import java.util.Iterator;
 
@@ -106,9 +104,13 @@ public class NormativeAgentSAI extends NormativeAg implements CircumstanceListen
                     }
                 }
         } else if (type.equals(Trigger.TEType.signal)) {
-            // when triggers a signal event, then it is added as environmental event in SAI ??
             if (isEnvFact) {
-                saiEngine.addEnvironmentalEvent(event, (Atom) event.getSources().getFirst(), LocalDateTime.now());
+                try {
+                    // when the agent receives a signal event, add as brute fact
+                    saiEngine.addEnvironmentalProperty(event);
+                } catch (Exception ex) {
+                    throw new RuntimeException(ex);
+                }
             }
         }
 
@@ -120,9 +122,9 @@ public class NormativeAgentSAI extends NormativeAg implements CircumstanceListen
         CommonTokenStream tokens = new CommonTokenStream(constLexer);
         sai_constitutiveParser constParser = new sai_constitutiveParser(tokens);
         ParseTree tree = constParser.constitutive_spec();
-        ParseTreeWalker walker = new ParseTreeWalker(); // create standard walker
+        ParseTreeWalker walker = new ParseTreeWalker();
         sai_constitutiveListenerImpl constExtractor = new sai_constitutiveListenerImpl(saiEngine.getProgram());
-        walker.walk(constExtractor, tree); // initiate walk of tree with listener
+        walker.walk(constExtractor, tree);
     }
 
 //    // todo: load npl norms according to sai norms ??
