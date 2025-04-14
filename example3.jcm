@@ -1,3 +1,5 @@
+// This example illustrates a normative agent integrating the NPL and SAI engine
+
 mas example2 {
 
     agent carlos {

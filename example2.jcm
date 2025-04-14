@@ -1,3 +1,6 @@
+// This example illustrates a normative agent with the capability to adapt regulations,
+// and uses a constitutive artifact to handle constitutive rules.
+
 mas example2 {
 
     agent bob {

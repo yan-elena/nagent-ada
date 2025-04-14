@@ -1,3 +1,6 @@
+// This example illustrates a normative agent with the capability to adapt regulations,
+// the detect, design, and execute sub-capabilities are represented as agent's plans
+
 mas example1 {
 
     agent alice {
