@@ -1,6 +1,6 @@
 // This example illustrates a normative agent integrating the NPL and SAI engine
 
-mas example2 {
+mas example3 {
 
     agent carlos {
         ag-class: adaptation.agent.ANormativeAgentSAI("src/reg/carlos_norms.npl", "src/reg/carlos_constitutive.sai")
