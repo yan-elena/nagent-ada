@@ -12,6 +12,7 @@ import org.antlr.v4.runtime.CharStreams;
 import org.antlr.v4.runtime.CommonTokenStream;
 import org.antlr.v4.runtime.tree.ParseTree;
 import org.antlr.v4.runtime.tree.ParseTreeWalker;
+import org.apache.batik.util.Platform;
 import sai.main.institution.SaiEngine;
 import sai.main.lang.parser.sai_constitutiveLexer;
 import sai.main.lang.parser.sai_constitutiveListenerImpl;
@@ -43,7 +44,7 @@ public class NormativeAgentSAI extends NormativeAg implements CircumstanceListen
 
         NPLMonitor gui = new NPLMonitor();
         try {
-            gui.add("demo", interpreter);
+            gui.add(getTS().getAgArch().getAgName(), interpreter);
 
         } catch (Exception e) {
             throw new RuntimeException(e);
