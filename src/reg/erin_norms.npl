@@ -1,0 +1,6 @@
+scope main {
+
+    norm n1: started
+       -> obligation(erin, true, complete(X), `10 seconds`).
+
+}
