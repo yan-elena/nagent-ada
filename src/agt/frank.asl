@@ -9,20 +9,21 @@
         .
 
 // Adaptation Fact: detect
-+detect(Me, What, How)
++detect(Me, What, How) : .my_name(Me)
     <-  .print("ADAPT FACT: detect Who: ", Ag, " What: ", What, " How: ", How);
         !detect(Me, What, How).
 
 // Adaptation Fact: design
-+design(Who, What, How)
++design(Me, What, How) : .my_name(Me)
     <-  .print("ADAPT FACT: Design Who: ", Who, " What: ", What, " How: ", How );
         .
 
-+!detect(Me, What, How) : How
+// Adaptation Plans: detect
++!detect(Me, What, How) : How & .my_name(Me)
     <-  .print("detected");
         +detected.
 
-+!detect(Me, What, How) : assigned(Ag, _, Me)
++!detect(Me, What, How) : assigned(Ag, _, Me) & .my_name(Me)
     <-  .print("detect...");
         .send(Ag, askOne, How);
         .wait(2000);
@@ -30,9 +31,11 @@
         .
 
 
+// other NPL facts
 +Instance[source(npli)]
     <-  .print("NPL FACT: ", Instance) .
 
+// other SAI facts
 +Constitutive[source(np)]
     <-  .print("SAI FACT: ", Constitutive) .
 
