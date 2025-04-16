@@ -10,12 +10,12 @@
 
 // Adaptation Fact: detect
 +detect(Me, What, How) : .my_name(Me)
-    <-  .print("ADAPT FACT: detect Who: ", Ag, " What: ", What, " How: ", How);
+    <-  .print("ADAPT FACT: detect Who: ", Me, " What: ", What, " How: ", How);
         !detect(Me, What, How).
 
 // Adaptation Fact: design
 +design(Me, What, How) : .my_name(Me)
-    <-  .print("ADAPT FACT: Design Who: ", Who, " What: ", What, " How: ", How );
+    <-  .print("ADAPT FACT: Design Who: ", Me, " What: ", What, " How: ", How );
         .
 
 // Adaptation Plans: detect
