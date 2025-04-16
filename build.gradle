@@ -93,6 +93,18 @@ task example3 (type: JavaExec, dependsOn: 'classes') {
     classpath sourceSets.main.runtimeClasspath
 }
 
+task example4 (type: JavaExec, dependsOn: 'classes') {
+    group       ' JaCaMo'
+    description 'runs the JaCaMo application'
+    doFirst {
+        mkdir 'log'
+    }
+    mainClass = 'jacamo.infra.JaCaMoLauncher'
+    args 'example4.jcm'
+    // jvmArgs '-Xss15m'
+    classpath sourceSets.main.runtimeClasspath
+}
+
 task buildJCMDeps (type: JavaExec, dependsOn: 'classes') {
     mainClass = 'jacamo.infra.RunJaCaMoProject'
     args = ['example1.jcm', '--deps']

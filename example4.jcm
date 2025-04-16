@@ -1,0 +1,19 @@
+// This example illustrates a normative agent integrating the NPL and SAI engine
+
+mas example4 {
+
+    agent erin {
+        ag-class: adaptation.agent.ANormativeAgentSAI("src/reg/erin_norms.npl", "src/reg/erin_constitutive.sai")
+        //focus: wsp.clock
+    }
+
+    agent frank {
+        ag-class: adaptation.agent.ANormativeAgentSAI("src/reg/frank_norms.npl", "src/reg/frank_constitutive.sai")
+    }
+
+    /*
+    workspace wsp {
+        artifact clock : cartago.tools.Clock()
+    }
+    */
+}
