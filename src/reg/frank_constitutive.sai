@@ -1,4 +1,4 @@
-institution_id : erin_inst .
+institution_id : frank_inst .
 
 status_functions:
 states: detect(Who, What, How), design(Who, What, How).
@@ -7,7 +7,7 @@ states: detect(Who, What, How), design(Who, What, How).
 constitutive_rules:
 /* when the Ag is started, detects (Who = Me, What= norm n1, How=by checking the unfulfillment)*/
 1: assigned(Ag, What, Me) count-as detect(Me, n1, unfulfilled(obligation(Ag, While, What, Deadline)))  .
-2: detected count-as design(Who, What, O) while  detect(Who, What, unfulfilled(O)).
+2:  count-as design(Who, What, create) when detected while detect(Who, What, unfulfilled(O)) .
 
 
 //2: unfulfilled(obligation(Ag, _, O, _)) count-as deliberate(DEL) while  detect(Who, What, How).

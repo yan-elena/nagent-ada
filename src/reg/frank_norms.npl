@@ -1,7 +1,6 @@
 scope main {
 
-    // bob has 3 seconds to achieve b(X), or else, sanction rule s1 will be triggered -- vl(X) & X > 5
-    norm n1: started
-       -> obligation(frank, true, job(X), `10 seconds`).
+    norm n1: detect(Me, What, How)
+       -> obligation(frank, n1, detect_goal(Me, What, How), `10 seconds`).
 
 }

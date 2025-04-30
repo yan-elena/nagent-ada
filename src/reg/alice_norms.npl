@@ -2,6 +2,6 @@ scope main {
 
     // alice has 3 seconds to achieve b(0), or else, sanction rule s1 will be triggered -- vl(X) & X > 5
     norm n1: true
-       -> obligation(alice, true, b(0), `10 seconds`).
+       -> obligation(alice, true, b(0), `never`).
 
 }

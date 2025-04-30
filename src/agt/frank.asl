@@ -11,7 +11,8 @@
 // Adaptation Fact: detect
 +detect(Me, What, How) : .my_name(Me)
     <-  .print("ADAPT FACT: detect Who: ", Me, " What: ", What, " How: ", How);
-        !detect(Me, What, How).
+        //!detect(Me, What, How)
+        .
 
 // Adaptation Fact: design
 +design(Me, What, How) : .my_name(Me)
@@ -19,15 +20,26 @@
         .
 
 // Adaptation Plans: detect
-+!detect(Me, What, How) : How & .my_name(Me)
++!detect_goal(Me, What, How) : How & .my_name(Me)
     <-  .print("detected");
         +detected.
 
-+!detect(Me, What, How) : assigned(Ag, _, Me) & .my_name(Me)
++!detect_goal(Me, What, How) : assigned(Ag, _, Me) & .my_name(Me)
     <-  .print("detect...");
         .send(Ag, askOne, How);
         .wait(2000);
         !detect(Me, What, How);
+        .
+
+
++active(obligation(O))
+    <-  .print("active O: ", O).
+
+//achieve obligation
++active(obligation(Who,When,What,Deadline)) : .my_name(Who)
+    <-  .print("active obligation: ", Who, When, What, Deadline);
+        .print("achieve What: ", What, " When: ", When);
+        !When; //todo: check
         .
 
 

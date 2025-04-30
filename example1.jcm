@@ -3,7 +3,7 @@
 
 mas example1 {
 
-    agent alice {
+    agent alice : example/alice.asl {
         ag-class: adaptation.agent.ANormativeAgentNPL("src/reg/alice_norms.npl")
     }
 }

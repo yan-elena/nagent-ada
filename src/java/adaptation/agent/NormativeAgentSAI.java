@@ -12,7 +12,6 @@ import org.antlr.v4.runtime.CharStreams;
 import org.antlr.v4.runtime.CommonTokenStream;
 import org.antlr.v4.runtime.tree.ParseTree;
 import org.antlr.v4.runtime.tree.ParseTreeWalker;
-import org.apache.batik.util.Platform;
 import sai.main.institution.SaiEngine;
 import sai.main.lang.parser.sai_constitutiveLexer;
 import sai.main.lang.parser.sai_constitutiveListenerImpl;
@@ -128,7 +127,9 @@ public class NormativeAgentSAI extends NormativeAg implements CircumstanceListen
         walker.walk(constExtractor, tree);
     }
 
-//    // todo: load npl norms according to sai norms ??
+//todo: load npl norms according to sai norms ??  --> needed because npl norms and sai norms are not compatible in the
+// deadline condition
+
 //    private void loadNPLProgram(String nplProgram) {
 //        NormativeProgram p = new NormativeProgram();
 //
